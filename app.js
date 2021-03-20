@@ -2,6 +2,7 @@
 const express = require('express');
 const ejs = require('ejs');
 const paypal = require('paypal-rest-sdk');
+const nodemailer = require("nodemailer");
 
 //Adding client id and client secret
 paypal.configure({
@@ -57,6 +58,7 @@ paypal.payment.create(create_payment_json, function (error, payment) {
     } else {
         for(let i = 0;i < payment.links.length;i++){
           if(payment.links[i].rel === 'approval_url'){
+           // console.log(payment.links[i].href);
             res.redirect(payment.links[i].href);
           }
         }
@@ -64,6 +66,71 @@ paypal.payment.create(create_payment_json, function (error, payment) {
 
 });
 }); 
+//we need to create the execute payment object with the payer id which we need to take out from the url after we click pay ...
+app.get('/success', (req, res) => {
+    const payerId = req.query.PayerID;//we are retreiving these details from thhe url
+    const paymentId = req.query.paymentId;
+  
+    const execute_payment_json = {//using those above details we are creating an object and sending to the the call back method
+      "payer_id": payerId,
+      "transactions": [{
+          "amount": {
+              "currency": "USD",
+              "total": "50.00"
+          }
+      }]
+    };
+  
+    paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+      if (error) {
+          console.log(error.response);
+          throw error;
+      } else {
+        var er=100;
+        for(let i = 0;i < payment.links.length;i++){
+        
+           // res.redirect(payment.links[i].href);
+          var amount= payment.transactions[i].amount.total;
+          var id=payment.id;
+          
+        }
+        
+          
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: '18btrse027@jainuniversity.ac.in',
+              pass: 'sarveshA1'
+            }
+          });
+          
+          var mailOptions = {
+            from: '18btrse027@jainuniversity.ac.in',
+            to: 'srisarvesh3612@gmail.com',
+            subject: 'Donation success',
+            text: `Have successfully donated the amount of ${amount} ur payment id is ${id}`
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(`mail sent ` );
+            }
+          });
+          
+         
+          res.send('Success');
+      }
+  });
+  
+  
+
+  });
+  
+
+//we are adding route to the cancel page 
+app.get('/cancel', (req, res) => res.send('Cancelled'));
 
 //starting our server on port 3000...
 app.listen(3000, () => console.log('Server Started'));
