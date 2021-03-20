@@ -30,7 +30,7 @@ app.post('/pay', (req, res) => {
       },
       "redirect_urls": {
           "return_url": "https://paymentgatewayinte.herokuapp.com/success",
-          "cancel_url": "https://paymentgatewayinte.herokuapp.com/cancel"
+          "cancel_url": "https://paymentgatewayinte.herokuapp.com//cancel"
       },
       "transactions": [{
           "item_list": {
@@ -99,13 +99,13 @@ app.get('/success', (req, res) => {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'sriiiiisss959@gmail.com',
-              pass: 'gopi_A13612'
+              user: 'sarveshrocksa1@gmail.com',
+              pass: 'sarvesh@A13612'
             }
           });
           
           var mailOptions = {
-            from: 'sriiiiisss959@gmail.com',
+            from: 'sarveshrocksa1@gmail.com',
             to: 'srisarvesh3612@gmail.com',
             subject: 'Donation success',
             text: `Have successfully donated the amount of ${amount} ur payment id is ${id}`
