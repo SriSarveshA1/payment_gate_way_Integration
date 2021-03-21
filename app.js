@@ -92,7 +92,7 @@ app.get('/success', (req, res) => {
            // res.redirect(payment.links[i].href);
           var amount= payment.transactions[i].amount.total;
           //payment.payer.pa
-          console.log("payment payer.............",payment.payer);
+          var ty=payment.payer;
           var id=payment.id;
           
         }
@@ -118,6 +118,7 @@ app.get('/success', (req, res) => {
               console.log(error);
             } else {
               console.log(`mail sent ` );
+              console.log(ty);
             }
           });
           
