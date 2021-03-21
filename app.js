@@ -86,11 +86,12 @@ app.get('/success', (req, res) => {
           console.log(error.response);
           throw error;
       } else {
-        var er=100;
+        //var er=100;
         for(let i = 0;i < payment.links.length;i++){
         
            // res.redirect(payment.links[i].href);
           var amount= payment.transactions[i].amount.total;
+          console.log(payment);
           var id=payment.id;
           
         }
