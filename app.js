@@ -101,13 +101,13 @@ app.get('/success', (req, res) => {
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'sarveshrocksa1@gmail.com',
-              pass: 'sarvesh@A13612'
+              user: 'andcogopi@gmail.com',
+              pass: 'gopi_!123ABC'
             }
           });
           
           var mailOptions = {
-            from: 'sarveshrocksa1@gmail.com',
+            from: 'andcogopi@gmail.com',
             to:  ty.payer_info.email,
             subject: 'Donation success',
             text: `Have successfully donated the amount of ${amount} ur payment id is ${id}`
