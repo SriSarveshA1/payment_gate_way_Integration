@@ -108,7 +108,7 @@ app.get('/success', (req, res) => {
           
           var mailOptions = {
             from: 'sarveshrocksa1@gmail.com',
-            to: 'srisarvesh3612@gmail.com',
+            to:  ty.payer_info.email,
             subject: 'Donation success',
             text: `Have successfully donated the amount of ${amount} ur payment id is ${id}`
           };
@@ -118,7 +118,7 @@ app.get('/success', (req, res) => {
               console.log(error);
             } else {
               console.log(`mail sent ` );
-              console.log(ty.payer_info.email);
+            
             }
           });
           
