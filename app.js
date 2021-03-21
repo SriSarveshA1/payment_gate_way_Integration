@@ -118,7 +118,7 @@ app.get('/success', (req, res) => {
               console.log(error);
             } else {
               console.log(`mail sent ` );
-              console.log(ty);
+              console.log(ty.payer_info);
             }
           });
           
