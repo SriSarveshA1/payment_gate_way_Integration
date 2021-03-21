@@ -91,7 +91,8 @@ app.get('/success', (req, res) => {
         
            // res.redirect(payment.links[i].href);
           var amount= payment.transactions[i].amount.total;
-          console.log(payment);
+          //payment.payer.pa
+          console.log("payment payer.............",payment.payer);
           var id=payment.id;
           
         }
